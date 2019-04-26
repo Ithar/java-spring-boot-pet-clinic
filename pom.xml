@@ -21,7 +21,6 @@
 
   <properties>
     <java.version>1.8</java.version>
-    <start-class>com.ithar.malik.udemy.spring.petclinic.PetClinicApplication</start-class>
   </properties>
 
   <dependencies>

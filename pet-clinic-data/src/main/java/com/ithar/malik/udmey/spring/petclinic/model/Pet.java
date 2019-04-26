@@ -1,4 +1,4 @@
-package com.ithar.malik.udemy.spring.petclinic.model;
+package com.ithar.malik.udmey.spring.petclinic.model;
 
 import java.time.LocalDate;
 import lombok.Data;
@@ -9,6 +9,5 @@ public class Pet {
     private PetType petType;
     private Owner owner;
     private LocalDate birthDate;
-
 
 }

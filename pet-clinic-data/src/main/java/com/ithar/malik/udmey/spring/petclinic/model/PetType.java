@@ -1,4 +1,4 @@
-package com.ithar.malik.udemy.spring.petclinic.model;
+package com.ithar.malik.udmey.spring.petclinic.model;
 
 import lombok.Data;
 

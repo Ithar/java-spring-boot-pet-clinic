@@ -2,9 +2,13 @@ package com.ithar.malik.udmey.spring.petclinic.model;
 
 import java.time.LocalDate;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class Pet {
+public class Pet extends BaseEntity {
+
+    private static final long serialVersionUID = -5891416855392196154L;
 
     private PetType petType;
     private Owner owner;

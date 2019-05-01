@@ -1,5 +1,6 @@
 package com.ithar.malik.udmey.spring.petclinic.respository;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -8,8 +9,8 @@ public abstract class MapRepository<T, ID> implements BaseCurdRepository<T, ID> 
 
      private Map<ID, T>  entities;
 
-    MapRepository(Map<ID, T> entities) {
-        this.entities = entities;
+    public MapRepository() {
+        this.entities = new HashMap<>();
     }
 
     @Override
@@ -27,7 +28,6 @@ public abstract class MapRepository<T, ID> implements BaseCurdRepository<T, ID> 
         entities.put(id, object);
         return object;
     }
-
 
     @Override
     public void deleteById(ID id) {

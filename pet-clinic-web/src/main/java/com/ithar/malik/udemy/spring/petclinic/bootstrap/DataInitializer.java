@@ -30,14 +30,14 @@ public class DataInitializer implements CommandLineRunner {
         owner1.setLastName("Weston");
 
         Owner owner2 = new Owner();
-        owner2.setId(1L);
+        owner2.setId(2L);
         owner2.setFirstName("Fiona");
         owner2.setLastName("Glenanne");
 
         ownerService.save(owner1);
         ownerService.save(owner2);
 
-        System.out.println("Loaded owners ... ");
+        System.out.println("Loaded owners ... ["+ownerService.findAll().size()+"]");
 
         Vet vet1 = new Vet();
         vet1.setId(1L);
@@ -52,6 +52,6 @@ public class DataInitializer implements CommandLineRunner {
          vetService.save(vet1);
          vetService.save(vet2);
 
-        System.out.println("Loaded vets ... ");
+        System.out.println("Loaded vets ... ["+vetService.findAll().size()+"]");
     }
 }

@@ -2,6 +2,7 @@ package com.ithar.malik.udemy.spring.petclinic.controllers;
 
 import com.ithar.malik.udmey.spring.petclinic.service.OwnerService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/owners")
@@ -15,9 +16,9 @@ public class OwnerController {
     }
 
     @RequestMapping({"", "/", "/index"})
-    public String list() {
+    public String list(Model model) {
 
-        ownerService.findAll();
+        model.addAttribute("owners", ownerService.findAll());
 
         return "owners/list";
     }

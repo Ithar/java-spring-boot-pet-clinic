@@ -8,5 +8,23 @@
 
 <h1 th:text="'Pet Clinic - Owners'">Owners</h1>
 
+
+  <table>
+    <thead>
+      <tr>
+        <td>Id</td>
+        <td>First Name</td>
+        <td>Last Name</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="owner: ${owners}">
+        <td th:text="${owner?.id}"></td>
+        <td th:text="${owner?.firstName}"></td>
+        <td th:text="${owner?.lastName}"></td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 </html>

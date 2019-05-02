@@ -1,8 +1,8 @@
 package com.ithar.malik.udmey.spring.petclinic.model;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Data
+@EqualsAndHashCode(callSuper = true)
 public class Vet extends Person {
 
 }

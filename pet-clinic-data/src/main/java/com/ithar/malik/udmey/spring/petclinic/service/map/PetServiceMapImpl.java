@@ -25,7 +25,7 @@ public class PetServiceMapImpl implements PetService {
 
     @Override
     public Pet save(Pet pet) {
-        return repository.save(pet.getId(), pet);
+        return repository.save(pet);
     }
 
     @Override

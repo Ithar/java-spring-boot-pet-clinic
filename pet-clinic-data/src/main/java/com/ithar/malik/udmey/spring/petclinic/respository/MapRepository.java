@@ -1,13 +1,15 @@
 package com.ithar.malik.udmey.spring.petclinic.respository;
 
+import com.ithar.malik.udmey.spring.petclinic.model.BaseEntity;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class MapRepository<T, ID> implements BaseCurdRepository<T, ID> {
+public abstract class MapRepository<T extends BaseEntity, ID extends Long> implements BaseCurdRepository<T, ID> {
 
-     private Map<ID, T>  entities;
+     private Map<Long, T>  entities;
 
     public MapRepository() {
         this.entities = new HashMap<>();
@@ -24,8 +26,17 @@ public abstract class MapRepository<T, ID> implements BaseCurdRepository<T, ID> 
     }
 
     @Override
-    public T save(ID id, T object) {
-        entities.put(id, object);
+    public T save(T object) {
+
+        if (object != null) {
+            if (object.getId() == null) {
+                object.setId(getNextId());
+            }
+            entities.put(object.getId(), object);
+        } else {
+            throw new RuntimeException("Saved object cannot be null");
+        }
+
         return object;
     }
 
@@ -37,5 +48,14 @@ public abstract class MapRepository<T, ID> implements BaseCurdRepository<T, ID> 
     @Override
     public void delete(T object) {
         entities.entrySet().removeIf(entry -> entry.getValue().equals(object));
+    }
+
+    private Long getNextId() {
+
+        if (entities.isEmpty()) {
+            return 1L;
+        }
+
+        return Collections.max(entities.keySet()) + 1;
     }
 }

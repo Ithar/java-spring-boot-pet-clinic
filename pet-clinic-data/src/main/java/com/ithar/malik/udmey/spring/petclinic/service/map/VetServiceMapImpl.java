@@ -25,7 +25,7 @@ public class VetServiceMapImpl implements VetService {
 
     @Override
     public Vet save(Vet vet) {
-        return repository.save(vet.getId(), vet);
+        return repository.save(vet);
     }
 
     @Override

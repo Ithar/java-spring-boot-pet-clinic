@@ -25,7 +25,7 @@ public class OwnerServiceMapImpl implements OwnerService {
 
     @Override
     public Owner save(Owner owner) {
-        return repository.save(owner.getId(), owner);
+        return repository.save(owner);
     }
 
     @Override

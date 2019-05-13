@@ -2,6 +2,7 @@ package com.ithar.malik.udemy.spring.petclinic.config;
 
 import com.ithar.malik.udmey.spring.petclinic.respository.OwnerMapRepository;
 import com.ithar.malik.udmey.spring.petclinic.respository.PetMapRepository;
+import com.ithar.malik.udmey.spring.petclinic.respository.PetTypeMapRepository;
 import com.ithar.malik.udmey.spring.petclinic.respository.VetMapRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,11 @@ public class RepositoryBeanConfig {
     @Bean
     public PetMapRepository getPetMapRepository() {
         return new PetMapRepository();
+    }
+
+    @Bean
+    public PetTypeMapRepository getPetTypeRepository() {
+        return new PetTypeMapRepository();
     }
 
 }

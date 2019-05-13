@@ -2,9 +2,11 @@ package com.ithar.malik.udemy.spring.petclinic.config;
 
 import com.ithar.malik.udmey.spring.petclinic.service.OwnerService;
 import com.ithar.malik.udmey.spring.petclinic.service.PetService;
+import com.ithar.malik.udmey.spring.petclinic.service.PetTypeService;
 import com.ithar.malik.udmey.spring.petclinic.service.VetService;
 import com.ithar.malik.udmey.spring.petclinic.service.map.OwnerServiceMapImpl;
 import com.ithar.malik.udmey.spring.petclinic.service.map.PetServiceMapImpl;
+import com.ithar.malik.udmey.spring.petclinic.service.map.PetTypeServiceMapImpl;
 import com.ithar.malik.udmey.spring.petclinic.service.map.VetServiceMapImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -17,7 +19,7 @@ public class ServiceBeanConfig {
     // Services
     @Bean
     public OwnerService getOwnerService() {
-        return new OwnerServiceMapImpl(repository.getOwnerMapRepository());
+        return new OwnerServiceMapImpl(repository.getOwnerMapRepository(), getPetTypeService(), getPetService());
     }
 
     @Bean
@@ -28,6 +30,11 @@ public class ServiceBeanConfig {
     @Bean
     public PetService getPetService() {
         return new PetServiceMapImpl(repository.getPetMapRepository());
+    }
+
+    @Bean
+    public PetTypeService getPetTypeService() {
+        return new PetTypeServiceMapImpl(repository.getPetTypeRepository());
     }
 
 

@@ -1,7 +1,9 @@
 package com.ithar.malik.udmey.spring.petclinic.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
+@AllArgsConstructor
 @Data
 public class Address {
 

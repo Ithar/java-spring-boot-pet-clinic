@@ -1,16 +1,23 @@
 package com.ithar.malik.udmey.spring.petclinic.service.map;
 
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;
+import com.ithar.malik.udmey.spring.petclinic.model.Pet;
 import com.ithar.malik.udmey.spring.petclinic.respository.OwnerMapRepository;
 import com.ithar.malik.udmey.spring.petclinic.service.OwnerService;
+import com.ithar.malik.udmey.spring.petclinic.service.PetService;
+import com.ithar.malik.udmey.spring.petclinic.service.PetTypeService;
 import java.util.Set;
 
 public class OwnerServiceMapImpl implements OwnerService {
 
     private final OwnerMapRepository repository;
+    private final PetTypeService petTypeService;
+    private final PetService petService;
 
-    public OwnerServiceMapImpl(OwnerMapRepository repository) {
+    public OwnerServiceMapImpl(OwnerMapRepository repository, PetTypeService petTypeService, PetService petService) {
         this.repository = repository;
+        this.petTypeService = petTypeService;
+        this.petService = petService;
     }
 
     @Override
@@ -25,7 +32,33 @@ public class OwnerServiceMapImpl implements OwnerService {
 
     @Override
     public Owner save(Owner owner) {
-        return repository.save(owner);
+
+        if (owner != null) {
+
+            Set<Pet> pets = owner.getPets();
+
+            if (pets != null && !pets.isEmpty()) {
+                pets.forEach(pet -> {
+
+                    if (pet == null)  {
+                        return;
+                    }
+
+                    if (pet.getPetType() != null && pet.getPetType().getId() == null) {
+                        petTypeService.save(pet.getPetType());
+                    }
+
+                    if (pet.getId() == null) {
+                        Pet savedPet = petService.save(pet);
+                        pet.setId(savedPet.getId());
+                    }
+                });
+            }
+
+            return repository.save(owner);
+        }
+
+        return null;
     }
 
     @Override

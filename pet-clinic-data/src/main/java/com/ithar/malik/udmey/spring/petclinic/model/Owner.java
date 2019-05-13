@@ -1,5 +1,6 @@
 package com.ithar.malik.udmey.spring.petclinic.model;
 
+import java.util.HashSet;
 import java.util.Set;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @Data
 public class Owner extends Person {
 
-    private Set<Pet> pets;
+    private Set<Pet> pets = new HashSet<>();
     private Address address;
 
 }

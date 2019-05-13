@@ -1,9 +1,9 @@
 package com.ithar.malik.udemy.spring.petclinic.config;
 
-import com.ithar.malik.udmey.spring.petclinic.respository.OwnerMapRepository;
-import com.ithar.malik.udmey.spring.petclinic.respository.PetMapRepository;
-import com.ithar.malik.udmey.spring.petclinic.respository.PetTypeMapRepository;
-import com.ithar.malik.udmey.spring.petclinic.respository.VetMapRepository;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.OwnerMapRepository;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.PetMapRepository;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.PetTypeMapRepository;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.VetMapRepository;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.VetSpecialtyMapRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;

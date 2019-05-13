@@ -1,6 +1,7 @@
-package com.ithar.malik.udmey.spring.petclinic.respository;
+package com.ithar.malik.udmey.spring.petclinic.respository.map;
 
 import com.ithar.malik.udmey.spring.petclinic.model.BaseEntity;
+import com.ithar.malik.udmey.spring.petclinic.respository.BaseCurdRepository;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;

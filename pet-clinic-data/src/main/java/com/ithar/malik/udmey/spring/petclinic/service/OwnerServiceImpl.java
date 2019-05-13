@@ -2,7 +2,7 @@ package com.ithar.malik.udmey.spring.petclinic.service;
 
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;
 import com.ithar.malik.udmey.spring.petclinic.model.Pet;
-import com.ithar.malik.udmey.spring.petclinic.respository.OwnerMapRepository;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.OwnerMapRepository;
 import java.util.Set;
 
 public class OwnerServiceImpl implements OwnerService {

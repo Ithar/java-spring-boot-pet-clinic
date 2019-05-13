@@ -1,7 +1,7 @@
 package com.ithar.malik.udmey.spring.petclinic.service;
 
 import com.ithar.malik.udmey.spring.petclinic.model.PetType;
-import com.ithar.malik.udmey.spring.petclinic.respository.PetTypeMapRepository;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.PetTypeMapRepository;
 import java.util.Set;
 
 public class PetTypeServiceImpl implements PetTypeService {

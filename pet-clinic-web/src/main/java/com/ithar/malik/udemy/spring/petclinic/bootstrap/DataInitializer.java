@@ -32,6 +32,16 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        if (!isDataLoaded()) {
+            loadData();
+        }
+    }
+
+    private boolean isDataLoaded() {
+        return !ownerService.findAll().isEmpty();
+    }
+
+    private void loadData() {
         PetType dogType = new PetType();
         dogType.setName("Dog");
 
@@ -70,7 +80,6 @@ public class DataInitializer implements CommandLineRunner {
 
         System.out.println("Loaded owners ... ["+ownerService.findAll().size()+"]");
 
-
         // Vets Specialties
         VetSpecialty radiology = new VetSpecialty();
         radiology.setDescription("Radiology");
@@ -97,8 +106,8 @@ public class DataInitializer implements CommandLineRunner {
         vet2.getSpecialties().add(savedSurgery);
         vet2.getSpecialties().add(savedDentistry);
 
-         vetService.save(vet1);
-         vetService.save(vet2);
+        vetService.save(vet1);
+        vetService.save(vet2);
 
         System.out.println("Loaded vets ... ["+vetService.findAll().size()+"]");
     }

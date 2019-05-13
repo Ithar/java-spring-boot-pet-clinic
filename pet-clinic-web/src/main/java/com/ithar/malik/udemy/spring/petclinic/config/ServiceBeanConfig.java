@@ -4,6 +4,8 @@ import com.ithar.malik.udmey.spring.petclinic.service.OwnerService;
 import com.ithar.malik.udmey.spring.petclinic.service.PetService;
 import com.ithar.malik.udmey.spring.petclinic.service.PetTypeService;
 import com.ithar.malik.udmey.spring.petclinic.service.VetService;
+import com.ithar.malik.udmey.spring.petclinic.service.VetSpecialtyService;
+import com.ithar.malik.udmey.spring.petclinic.service.VetSpecialtyServiceImpl;
 import com.ithar.malik.udmey.spring.petclinic.service.map.OwnerServiceMapImpl;
 import com.ithar.malik.udmey.spring.petclinic.service.map.PetServiceMapImpl;
 import com.ithar.malik.udmey.spring.petclinic.service.map.PetTypeServiceMapImpl;
@@ -14,28 +16,32 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServiceBeanConfig {
 
-    private RepositoryBeanConfig repository = new RepositoryBeanConfig();
+    private RepositoryBeanConfig repositories = new RepositoryBeanConfig();
 
     // Services
     @Bean
     public OwnerService getOwnerService() {
-        return new OwnerServiceMapImpl(repository.getOwnerMapRepository(), getPetTypeService(), getPetService());
+        return new OwnerServiceMapImpl(repositories.getOwnerMapRepository(), getPetTypeService(), getPetService());
     }
 
     @Bean
     public VetService getVetService() {
-        return new VetServiceMapImpl(repository.getVetMapRepository());
+        return new VetServiceMapImpl(repositories.getVetMapRepository());
     }
 
     @Bean
     public PetService getPetService() {
-        return new PetServiceMapImpl(repository.getPetMapRepository());
+        return new PetServiceMapImpl(repositories.getPetMapRepository());
     }
 
     @Bean
     public PetTypeService getPetTypeService() {
-        return new PetTypeServiceMapImpl(repository.getPetTypeRepository());
+        return new PetTypeServiceMapImpl(repositories.getPetTypeRepository());
     }
 
+    @Bean
+    public VetSpecialtyService getVetSpecialtyService() {
+        return new VetSpecialtyServiceImpl(repositories.getVetSpecialtyRepository());
+    }
 
 }

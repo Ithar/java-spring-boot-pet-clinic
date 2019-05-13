@@ -26,7 +26,7 @@ public class ServiceBeanConfig {
 
     @Bean
     public VetService getVetService() {
-        return new VetServiceImpl(repositories.getVetMapRepository());
+        return new VetServiceImpl(repositories.getVetMapRepository(), repositories.getVetSpecialtyRepository());
     }
 
     @Bean

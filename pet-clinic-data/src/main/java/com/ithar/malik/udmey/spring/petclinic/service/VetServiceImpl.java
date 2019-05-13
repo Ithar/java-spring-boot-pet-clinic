@@ -1,39 +1,60 @@
 package com.ithar.malik.udmey.spring.petclinic.service;
 
 import com.ithar.malik.udmey.spring.petclinic.model.Vet;
+import com.ithar.malik.udmey.spring.petclinic.model.VetSpecialty;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.VetMapRepository;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.VetSpecialtyMapRepository;
 import java.util.Set;
 
 public class VetServiceImpl implements VetService {
 
-    private final VetMapRepository repository;
+    private final VetMapRepository vetMapRepository;
+    private final VetSpecialtyMapRepository vetSpecialtyMapRepository;
 
-    public VetServiceImpl(VetMapRepository repository) {
-        this.repository = repository;
+    public VetServiceImpl(VetMapRepository vetMapRepository, VetSpecialtyMapRepository vetSpecialtyMapRepository) {
+        this.vetMapRepository = vetMapRepository;
+        this.vetSpecialtyMapRepository = vetSpecialtyMapRepository;
     }
 
     @Override
     public Vet findById(Long id) {
-        return repository.findById(id);
+        return vetMapRepository.findById(id);
     }
 
     @Override
     public Set<Vet> findAll() {
-        return repository.findAll();
+        return vetMapRepository.findAll();
     }
 
     @Override
     public Vet save(Vet vet) {
-        return repository.save(vet);
+
+        if (vet != null) {
+
+            Set<VetSpecialty> specialties = vet.getSpecialties();
+            if (specialties != null && !specialties.isEmpty()) {
+
+                specialties.forEach(specialty -> {
+                    if (specialty != null && specialty.getId() == null) {
+                        VetSpecialty savedVetSpecialty = vetSpecialtyMapRepository.save(specialty);
+                        specialty.setId(savedVetSpecialty.getId());
+                    }
+                });
+            }
+
+            return vetMapRepository.save(vet);
+        }
+
+        return null; // TODO [IM 19-05-13] - Change this to optional
     }
 
     @Override
     public void deleteById(Long id) {
-        repository.deleteById(id);
+        vetMapRepository.deleteById(id);
     }
 
     @Override
     public void delete(Vet vet) {
-        repository.delete(vet);
+        vetMapRepository.delete(vet);
     }
 }

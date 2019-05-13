@@ -1,20 +1,17 @@
-package com.ithar.malik.udmey.spring.petclinic.service.map;
+package com.ithar.malik.udmey.spring.petclinic.service;
 
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;
 import com.ithar.malik.udmey.spring.petclinic.model.Pet;
 import com.ithar.malik.udmey.spring.petclinic.respository.OwnerMapRepository;
-import com.ithar.malik.udmey.spring.petclinic.service.OwnerService;
-import com.ithar.malik.udmey.spring.petclinic.service.PetService;
-import com.ithar.malik.udmey.spring.petclinic.service.PetTypeService;
 import java.util.Set;
 
-public class OwnerServiceMapImpl implements OwnerService {
+public class OwnerServiceImpl implements OwnerService {
 
     private final OwnerMapRepository repository;
     private final PetTypeService petTypeService;
     private final PetService petService;
 
-    public OwnerServiceMapImpl(OwnerMapRepository repository, PetTypeService petTypeService, PetService petService) {
+    public OwnerServiceImpl(OwnerMapRepository repository, PetTypeService petTypeService, PetService petService) {
         this.repository = repository;
         this.petTypeService = petTypeService;
         this.petService = petService;

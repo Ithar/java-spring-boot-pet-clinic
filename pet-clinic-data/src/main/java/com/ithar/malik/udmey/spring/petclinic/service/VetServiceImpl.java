@@ -1,15 +1,14 @@
-package com.ithar.malik.udmey.spring.petclinic.service.map;
+package com.ithar.malik.udmey.spring.petclinic.service;
 
 import com.ithar.malik.udmey.spring.petclinic.model.Vet;
 import com.ithar.malik.udmey.spring.petclinic.respository.VetMapRepository;
-import com.ithar.malik.udmey.spring.petclinic.service.VetService;
 import java.util.Set;
 
-public class VetServiceMapImpl implements VetService {
+public class VetServiceImpl implements VetService {
 
     private final VetMapRepository repository;
 
-    public VetServiceMapImpl(VetMapRepository repository) {
+    public VetServiceImpl(VetMapRepository repository) {
         this.repository = repository;
     }
 

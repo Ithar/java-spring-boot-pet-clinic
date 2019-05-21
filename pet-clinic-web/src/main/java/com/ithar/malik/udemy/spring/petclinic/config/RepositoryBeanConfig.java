@@ -6,9 +6,9 @@ import com.ithar.malik.udmey.spring.petclinic.respository.map.PetTypeMapReposito
 import com.ithar.malik.udmey.spring.petclinic.respository.map.VetMapRepository;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.VetSpecialtyMapRepository;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class RepositoryBeanConfig {
 
     // Repositories

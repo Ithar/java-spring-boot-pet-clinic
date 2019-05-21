@@ -11,9 +11,9 @@ import com.ithar.malik.udmey.spring.petclinic.service.VetServiceImpl;
 import com.ithar.malik.udmey.spring.petclinic.service.VetSpecialtyService;
 import com.ithar.malik.udmey.spring.petclinic.service.VetSpecialtyServiceImpl;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class ServiceBeanConfig {
 
     private RepositoryBeanConfig repositories = new RepositoryBeanConfig();

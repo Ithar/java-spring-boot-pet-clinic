@@ -43,10 +43,10 @@ public class DataInitializer implements CommandLineRunner {
 
     private void loadData() {
         PetType dogType = new PetType();
-        dogType.setName("Dog");
+        dogType.setTypeName("Dog");
 
         PetType catType = new PetType();
-        catType.setName("Cat");
+        catType.setTypeName("Cat");
 
         PetType savedDogType = petTypeService.save(dogType);
         PetType savedCatType = petTypeService.save(catType);

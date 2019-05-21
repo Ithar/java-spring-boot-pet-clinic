@@ -1,7 +1,7 @@
 package com.ithar.malik.udmey.spring.petclinic.service;
 
+import com.ithar.malik.udmey.spring.petclinic.model.Specialty;
 import com.ithar.malik.udmey.spring.petclinic.model.Vet;
-import com.ithar.malik.udmey.spring.petclinic.model.VetSpecialty;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.VetMapRepository;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.VetSpecialtyMapRepository;
 import java.util.Set;
@@ -31,13 +31,13 @@ public class VetServiceImpl implements VetService {
 
         if (vet != null) {
 
-            Set<VetSpecialty> specialties = vet.getSpecialties();
+            Set<Specialty> specialties = vet.getSpecialties();
             if (specialties != null && !specialties.isEmpty()) {
 
                 specialties.forEach(specialty -> {
                     if (specialty != null && specialty.getId() == null) {
-                        VetSpecialty savedVetSpecialty = vetSpecialtyMapRepository.save(specialty);
-                        specialty.setId(savedVetSpecialty.getId());
+                        Specialty savedSpecialty = vetSpecialtyMapRepository.save(specialty);
+                        specialty.setId(savedSpecialty.getId());
                     }
                 });
             }

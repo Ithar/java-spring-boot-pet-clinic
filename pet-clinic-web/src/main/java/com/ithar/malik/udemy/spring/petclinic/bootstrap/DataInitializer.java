@@ -4,8 +4,8 @@ import com.ithar.malik.udmey.spring.petclinic.model.Address;
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;
 import com.ithar.malik.udmey.spring.petclinic.model.Pet;
 import com.ithar.malik.udmey.spring.petclinic.model.PetType;
+import com.ithar.malik.udmey.spring.petclinic.model.Specialty;
 import com.ithar.malik.udmey.spring.petclinic.model.Vet;
-import com.ithar.malik.udmey.spring.petclinic.model.VetSpecialty;
 import com.ithar.malik.udmey.spring.petclinic.service.OwnerService;
 import com.ithar.malik.udmey.spring.petclinic.service.PetTypeService;
 import com.ithar.malik.udmey.spring.petclinic.service.VetService;
@@ -81,18 +81,18 @@ public class DataInitializer implements CommandLineRunner {
         System.out.println("Loaded owners ... ["+ownerService.findAll().size()+"]");
 
         // Vets Specialties
-        VetSpecialty radiology = new VetSpecialty();
+        Specialty radiology = new Specialty();
         radiology.setDescription("Radiology");
 
-        VetSpecialty surgery = new VetSpecialty();
+        Specialty surgery = new Specialty();
         surgery.setDescription("Surgery");
 
-        VetSpecialty dentistry = new VetSpecialty();
+        Specialty dentistry = new Specialty();
         dentistry.setDescription("Dentistry");
 
-        VetSpecialty savedRadiology = betSpecialtyService.save(radiology);
-        VetSpecialty savedSurgery  = betSpecialtyService.save(surgery);
-        VetSpecialty savedDentistry = betSpecialtyService.save(dentistry);
+        Specialty savedRadiology = betSpecialtyService.save(radiology);
+        Specialty savedSurgery  = betSpecialtyService.save(surgery);
+        Specialty savedDentistry = betSpecialtyService.save(dentistry);
 
         // Vets
         Vet vet1 = new Vet();

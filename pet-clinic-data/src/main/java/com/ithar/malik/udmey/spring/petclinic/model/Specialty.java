@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class VetSpecialty extends BaseEntity {
+public class Specialty extends BaseEntity {
 
     private static final long serialVersionUID = -5559830093891781040L;
 

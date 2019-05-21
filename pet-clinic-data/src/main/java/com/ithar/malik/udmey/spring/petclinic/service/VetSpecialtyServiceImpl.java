@@ -1,6 +1,6 @@
 package com.ithar.malik.udmey.spring.petclinic.service;
 
-import com.ithar.malik.udmey.spring.petclinic.model.VetSpecialty;
+import com.ithar.malik.udmey.spring.petclinic.model.Specialty;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.VetSpecialtyMapRepository;
 import java.util.Set;
 
@@ -13,18 +13,18 @@ public class VetSpecialtyServiceImpl implements VetSpecialtyService {
     }
 
     @Override
-    public VetSpecialty findById(Long id) {
+    public Specialty findById(Long id) {
         return repository.findById(id);
     }
 
     @Override
-    public Set<VetSpecialty> findAll() {
+    public Set<Specialty> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public VetSpecialty save(VetSpecialty vetSpecialty) {
-        return repository.save(vetSpecialty);
+    public Specialty save(Specialty specialty) {
+        return repository.save(specialty);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class VetSpecialtyServiceImpl implements VetSpecialtyService {
     }
 
     @Override
-    public void delete(VetSpecialty vetSpecialty) {
-        repository.delete(vetSpecialty);
+    public void delete(Specialty specialty) {
+        repository.delete(specialty);
     }
 }

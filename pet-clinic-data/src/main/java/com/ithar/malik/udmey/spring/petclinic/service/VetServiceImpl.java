@@ -18,7 +18,7 @@ public class VetServiceImpl implements VetService {
 
     @Override
     public Vet findById(Long id) {
-        return vetMapRepository.findById(id);
+        return vetMapRepository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find vet with id: "+id));
     }
 
     @Override

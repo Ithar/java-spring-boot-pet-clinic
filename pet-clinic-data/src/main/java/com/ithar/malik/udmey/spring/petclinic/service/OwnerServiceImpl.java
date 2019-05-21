@@ -2,16 +2,17 @@ package com.ithar.malik.udmey.spring.petclinic.service;
 
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;
 import com.ithar.malik.udmey.spring.petclinic.model.Pet;
-import com.ithar.malik.udmey.spring.petclinic.respository.map.OwnerMapRepo;
+import com.ithar.malik.udmey.spring.petclinic.respository.OwnerRepository;
+import java.util.HashSet;
 import java.util.Set;
 
 public class OwnerServiceImpl implements OwnerService {
 
-    private final OwnerMapRepo repository;
+    private final OwnerRepository<Owner, Long> repository;
     private final PetTypeService petTypeService;
     private final PetService petService;
 
-    public OwnerServiceImpl(OwnerMapRepo repository, PetTypeService petTypeService, PetService petService) {
+    public OwnerServiceImpl(OwnerRepository repository, PetTypeService petTypeService, PetService petService) {
         this.repository = repository;
         this.petTypeService = petTypeService;
         this.petService = petService;
@@ -19,12 +20,19 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Override
     public Owner findById(Long id) {
-        return repository.findById(id);
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find owner with id:"+id));
     }
 
     @Override
     public Set<Owner> findAll() {
-        return repository.findAll();
+
+        Set<Owner> owners = repository.findAll();
+
+        if (!owners.isEmpty()) {
+            return owners;
+        }
+
+        return new HashSet<>();
     }
 
     @Override
@@ -70,6 +78,13 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Override
     public Set<Owner> findByLastName(String lastName) {
-        return null; // TODO - [IM 19-05-01] - Needs implementation
+
+        Set<Owner> owners = repository.findByLastName(lastName);
+
+        if (!owners.isEmpty()) {
+            return owners;
+        }
+
+        return new HashSet<>();
     }
 }

@@ -1,5 +1,6 @@
 package com.ithar.malik.udemy.spring.petclinic.config;
 
+import com.ithar.malik.udmey.spring.petclinic.respository.OwnerRepository;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.OwnerMapRepo;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.PetMapRepo;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.PetTypeMapRepo;
@@ -13,7 +14,7 @@ public class RepositoryBeanConfig {
 
     // Repositories
     @Bean
-    public OwnerMapRepo getOwnerMapRepository() {
+    public OwnerRepository getOwnerRepository() {
         return new OwnerMapRepo();
     }
 

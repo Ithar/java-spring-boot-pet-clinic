@@ -6,19 +6,25 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 public abstract class MapRepo<T extends BaseEntity, ID extends Long> implements BaseCurdRepository<T, ID> {
 
-     private Map<Long, T>  entities;
+    private Map<Long, T>  entities;
 
     public MapRepo() {
         this.entities = new HashMap<>();
     }
 
     @Override
-    public T findById(ID id) {
-        return entities.get(id);
+    public Optional<T> findById(ID id) {
+
+        if (entities.get(id) == null) {
+            return Optional.empty();
+        }
+
+        return Optional.of(entities.get(id));
     }
 
     @Override

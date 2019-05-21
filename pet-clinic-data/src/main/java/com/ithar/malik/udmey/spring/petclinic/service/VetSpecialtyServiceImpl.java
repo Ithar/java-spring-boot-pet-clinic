@@ -14,7 +14,7 @@ public class VetSpecialtyServiceImpl implements VetSpecialtyService {
 
     @Override
     public Specialty findById(Long id) {
-        return repository.findById(id);
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find specialty with id: "+id));
     }
 
     @Override

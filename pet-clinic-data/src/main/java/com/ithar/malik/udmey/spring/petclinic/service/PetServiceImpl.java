@@ -14,7 +14,7 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public Pet findById(Long id) {
-        return repository.findById(id);
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find pet with id: "+id));
     }
 
     @Override

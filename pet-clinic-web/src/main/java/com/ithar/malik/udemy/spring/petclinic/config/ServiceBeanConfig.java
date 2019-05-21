@@ -21,7 +21,7 @@ public class ServiceBeanConfig {
     // Services
     @Bean
     public OwnerService getOwnerService() {
-        return new OwnerServiceImpl(repositories.getOwnerMapRepository(), getPetTypeService(), getPetService());
+        return new OwnerServiceImpl(repositories.getOwnerRepository(), getPetTypeService(), getPetService());
     }
 
     @Bean

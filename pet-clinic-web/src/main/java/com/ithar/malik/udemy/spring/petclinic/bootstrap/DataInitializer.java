@@ -78,8 +78,6 @@ public class DataInitializer implements CommandLineRunner {
         ownerService.save(owner1);
         ownerService.save(owner2);
 
-        System.out.println("Loaded owners ... ["+ownerService.findAll().size()+"]");
-
         // Vets Specialties
         Specialty radiology = new Specialty();
         radiology.setDescription("Radiology");
@@ -109,6 +107,9 @@ public class DataInitializer implements CommandLineRunner {
         vetService.save(vet1);
         vetService.save(vet2);
 
+        System.out.println("\n==========================================================");
+        System.out.println("Loaded owners ... ["+ownerService.findAll().size()+"]");
         System.out.println("Loaded vets ... ["+vetService.findAll().size()+"]");
+        System.out.println("==========================================================\n");
     }
 }

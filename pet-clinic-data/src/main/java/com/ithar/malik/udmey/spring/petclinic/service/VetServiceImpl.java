@@ -2,28 +2,29 @@ package com.ithar.malik.udmey.spring.petclinic.service;
 
 import com.ithar.malik.udmey.spring.petclinic.model.Specialty;
 import com.ithar.malik.udmey.spring.petclinic.model.Vet;
-import com.ithar.malik.udmey.spring.petclinic.respository.map.VetMapRepo;
-import com.ithar.malik.udmey.spring.petclinic.respository.map.VetSpecialtyMapRepo;
+import com.ithar.malik.udmey.spring.petclinic.respository.SpecialtyRepository;
+import com.ithar.malik.udmey.spring.petclinic.respository.VetRepository;
 import java.util.Set;
 
 public class VetServiceImpl implements VetService {
 
-    private final VetMapRepo vetMapRepository;
-    private final VetSpecialtyMapRepo vetSpecialtyMapRepository;
+    private final VetRepository<Vet, Long> vetRepository;
+    private final SpecialtyRepository<Specialty, Long> specialtyRepository;
 
-    public VetServiceImpl(VetMapRepo vetMapRepository, VetSpecialtyMapRepo vetSpecialtyMapRepository) {
-        this.vetMapRepository = vetMapRepository;
-        this.vetSpecialtyMapRepository = vetSpecialtyMapRepository;
+    public VetServiceImpl(VetRepository<Vet, Long> vetRepository,
+        SpecialtyRepository<Specialty, Long> specialtyRepository) {
+        this.vetRepository = vetRepository;
+        this.specialtyRepository = specialtyRepository;
     }
 
     @Override
     public Vet findById(Long id) {
-        return vetMapRepository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find vet with id: "+id));
+        return vetRepository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find vet with id: "+id));
     }
 
     @Override
     public Set<Vet> findAll() {
-        return vetMapRepository.findAll();
+        return vetRepository.findAll();
     }
 
     @Override
@@ -36,13 +37,13 @@ public class VetServiceImpl implements VetService {
 
                 specialties.forEach(specialty -> {
                     if (specialty != null && specialty.getId() == null) {
-                        Specialty savedSpecialty = vetSpecialtyMapRepository.save(specialty);
+                        Specialty savedSpecialty = specialtyRepository.save(specialty);
                         specialty.setId(savedSpecialty.getId());
                     }
                 });
             }
 
-            return vetMapRepository.save(vet);
+            return vetRepository.save(vet);
         }
 
         return null; // TODO [IM 19-05-13] - Change this to optional
@@ -50,11 +51,11 @@ public class VetServiceImpl implements VetService {
 
     @Override
     public void deleteById(Long id) {
-        vetMapRepository.deleteById(id);
+        vetRepository.deleteById(id);
     }
 
     @Override
     public void delete(Vet vet) {
-        vetMapRepository.delete(vet);
+        vetRepository.delete(vet);
     }
 }

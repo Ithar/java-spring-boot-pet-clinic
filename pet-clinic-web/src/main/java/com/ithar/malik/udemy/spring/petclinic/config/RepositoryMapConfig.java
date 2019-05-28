@@ -1,16 +1,20 @@
 package com.ithar.malik.udemy.spring.petclinic.config;
 
 import com.ithar.malik.udmey.spring.petclinic.respository.OwnerRepository;
+import com.ithar.malik.udmey.spring.petclinic.respository.PetRepository;
+import com.ithar.malik.udmey.spring.petclinic.respository.PetTypeRepository;
+import com.ithar.malik.udmey.spring.petclinic.respository.SpecialtyRepository;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.OwnerMapRepo;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.PetMapRepo;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.PetTypeMapRepo;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.SpecialtyMapRepo;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.VetMapRepo;
-import com.ithar.malik.udmey.spring.petclinic.respository.map.VetSpecialtyMapRepo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RepositoryBeanConfig {
+//@Profile("map")
+public class RepositoryMapConfig {
 
     // Repositories
     @Bean
@@ -24,18 +28,18 @@ public class RepositoryBeanConfig {
     }
 
     @Bean
-    public PetMapRepo getPetMapRepository() {
+    public PetRepository getPetRepository() {
         return new PetMapRepo();
     }
 
     @Bean
-    public PetTypeMapRepo getPetTypeRepository() {
+    public PetTypeRepository getPetTypeRepository() {
         return new PetTypeMapRepo();
     }
 
     @Bean
-    public VetSpecialtyMapRepo getVetSpecialtyRepository() {
-        return new VetSpecialtyMapRepo();
+    public SpecialtyRepository getSpecialtyRepository() {
+        return new SpecialtyMapRepo();
     }
 
 }

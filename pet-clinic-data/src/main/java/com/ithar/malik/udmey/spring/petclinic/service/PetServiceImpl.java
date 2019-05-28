@@ -1,14 +1,14 @@
 package com.ithar.malik.udmey.spring.petclinic.service;
 
 import com.ithar.malik.udmey.spring.petclinic.model.Pet;
-import com.ithar.malik.udmey.spring.petclinic.respository.map.PetMapRepo;
+import com.ithar.malik.udmey.spring.petclinic.respository.PetRepository;
 import java.util.Set;
 
 public class PetServiceImpl implements PetService {
 
-    private final PetMapRepo repository;
+    private final PetRepository<Pet, Long> repository;
 
-    public PetServiceImpl(PetMapRepo repository) {
+    public PetServiceImpl(PetRepository repository) {
         this.repository = repository;
     }
 

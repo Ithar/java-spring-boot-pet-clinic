@@ -1,9 +1,10 @@
-package com.ithar.malik.udemy.spring.petclinic.config;
+package com.ithar.malik.udmey.spring.petclinic.config;
 
 import com.ithar.malik.udmey.spring.petclinic.respository.OwnerRepository;
 import com.ithar.malik.udmey.spring.petclinic.respository.PetRepository;
 import com.ithar.malik.udmey.spring.petclinic.respository.PetTypeRepository;
 import com.ithar.malik.udmey.spring.petclinic.respository.SpecialtyRepository;
+import com.ithar.malik.udmey.spring.petclinic.respository.VetRepository;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.OwnerMapRepo;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.PetMapRepo;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.PetTypeMapRepo;
@@ -11,9 +12,10 @@ import com.ithar.malik.udmey.spring.petclinic.respository.map.SpecialtyMapRepo;
 import com.ithar.malik.udmey.spring.petclinic.respository.map.VetMapRepo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 @Configuration
-//@Profile("map")
+@Profile("map")
 public class RepositoryMapConfig {
 
     // Repositories
@@ -23,7 +25,7 @@ public class RepositoryMapConfig {
     }
 
     @Bean
-    public VetMapRepo getVetMapRepository() {
+    public VetRepository getVetMapRepository() {
         return new VetMapRepo();
     }
 

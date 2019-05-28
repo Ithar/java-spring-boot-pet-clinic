@@ -1,4 +1,4 @@
-package com.ithar.malik.udemy.spring.petclinic;
+package com.ithar.malik.udmey.spring.petclinic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

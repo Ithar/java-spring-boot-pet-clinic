@@ -1,4 +1,4 @@
-package com.ithar.malik.udemy.spring.petclinic;
+package com.ithar.malik.udmey.spring.petclinic;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

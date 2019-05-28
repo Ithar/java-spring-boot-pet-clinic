@@ -1,4 +1,4 @@
-package com.ithar.malik.udemy.spring.petclinic.config;
+package com.ithar.malik.udmey.spring.petclinic.config;
 
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;
 import com.ithar.malik.udmey.spring.petclinic.model.Pet;
@@ -24,7 +24,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-//@Profile("map")
 public class ServiceBeanConfig {
 
     private final OwnerRepository<Owner, Long> ownerRepository;

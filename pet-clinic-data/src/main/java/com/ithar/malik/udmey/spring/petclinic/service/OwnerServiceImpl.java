@@ -12,7 +12,7 @@ public class OwnerServiceImpl implements OwnerService {
     private final PetTypeService petTypeService;
     private final PetService petService;
 
-    public OwnerServiceImpl(OwnerRepository repository, PetTypeService petTypeService, PetService petService) {
+    public OwnerServiceImpl(OwnerRepository<Owner, Long> repository, PetTypeService petTypeService, PetService petService) {
         this.repository = repository;
         this.petTypeService = petTypeService;
         this.petService = petService;

@@ -1,4 +1,4 @@
-package com.ithar.malik.udemy.spring.petclinic.controllers;
+package com.ithar.malik.udmey.spring.petclinic.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

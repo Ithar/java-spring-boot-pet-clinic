@@ -1,4 +1,4 @@
-package com.ithar.malik.udemy.spring.petclinic.controllers;
+package com.ithar.malik.udmey.spring.petclinic.controllers;
 
 import com.ithar.malik.udmey.spring.petclinic.service.VetService;
 import org.springframework.stereotype.Controller;

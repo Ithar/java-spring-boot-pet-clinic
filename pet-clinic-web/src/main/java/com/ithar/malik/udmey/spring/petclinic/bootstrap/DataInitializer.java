@@ -1,4 +1,4 @@
-package com.ithar.malik.udemy.spring.petclinic.bootstrap;
+package com.ithar.malik.udmey.spring.petclinic.bootstrap;
 
 import com.ithar.malik.udmey.spring.petclinic.model.Address;
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;

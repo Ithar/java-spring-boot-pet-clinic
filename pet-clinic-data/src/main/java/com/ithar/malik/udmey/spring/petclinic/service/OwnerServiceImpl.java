@@ -2,10 +2,10 @@ package com.ithar.malik.udmey.spring.petclinic.service;
 
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;
 import com.ithar.malik.udmey.spring.petclinic.model.Pet;
-import com.ithar.malik.udmey.spring.petclinic.model.PetType;
 import com.ithar.malik.udmey.spring.petclinic.respository.OwnerRepository;
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.transaction.annotation.Transactional;
 
 public class OwnerServiceImpl implements OwnerService {
 
@@ -25,6 +25,7 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
+    @Transactional
     public Set<Owner> findAll() {
 
         Set<Owner> owners = new HashSet<>();
@@ -39,6 +40,7 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
+    @Transactional
     public Owner save(Owner owner) {
 
         if (owner != null) {
@@ -53,8 +55,7 @@ public class OwnerServiceImpl implements OwnerService {
                     }
 
                     if (pet.getPetType() != null && pet.getPetType().getId() == null) {
-                        PetType savedPetType = petTypeService.save(pet.getPetType());
-                        pet.setPetType(savedPetType);
+                        petTypeService.save(pet.getPetType());
                     }
 
                     if (pet.getId() == null) {

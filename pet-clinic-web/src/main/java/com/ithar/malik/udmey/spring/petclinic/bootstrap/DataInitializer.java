@@ -66,7 +66,7 @@ public class DataInitializer implements CommandLineRunner {
 
         Address address2 = new Address("123 Brick Lane", "New York", "07807787878");
         Pet justin = new Pet();
-        justin.setName("justin");
+        justin.setName("Justin");
         justin.setPetType(savedCatType);
 
         Owner owner2 = new Owner();

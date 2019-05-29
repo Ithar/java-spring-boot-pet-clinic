@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -23,16 +23,16 @@ public class Pet extends BaseEntity {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name="owner_id")
+    @ManyToOne
     private Owner owner;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private PetType petType;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
     private Set<Visit> visits = new HashSet<>();
 
+    @Column(name="DOB")
     private LocalDate birthDate;
 
 }

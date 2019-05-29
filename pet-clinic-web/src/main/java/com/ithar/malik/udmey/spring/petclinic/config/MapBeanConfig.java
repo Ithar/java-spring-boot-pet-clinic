@@ -10,6 +10,11 @@ import com.ithar.malik.udmey.spring.petclinic.respository.PetRepository;
 import com.ithar.malik.udmey.spring.petclinic.respository.PetTypeRepository;
 import com.ithar.malik.udmey.spring.petclinic.respository.SpecialtyRepository;
 import com.ithar.malik.udmey.spring.petclinic.respository.VetRepository;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.OwnerMapRepo;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.PetMapRepo;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.PetTypeMapRepo;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.SpecialtyMapRepo;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.VetMapRepo;
 import com.ithar.malik.udmey.spring.petclinic.service.OwnerService;
 import com.ithar.malik.udmey.spring.petclinic.service.OwnerServiceImpl;
 import com.ithar.malik.udmey.spring.petclinic.service.PetService;
@@ -22,53 +27,61 @@ import com.ithar.malik.udmey.spring.petclinic.service.VetSpecialtyService;
 import com.ithar.malik.udmey.spring.petclinic.service.VetSpecialtyServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
+@Profile("map")
 @Configuration
-public class ServiceBeanConfig {
+public class MapBeanConfig {
 
-    private final OwnerRepository<Owner, Long> ownerRepository;
-    private final VetRepository<Vet, Long> vetRepository;
-    private final PetRepository<Pet, Long> petRepository;
-    private final PetTypeRepository<PetType, Long> petTypeRepository;
-    private final SpecialtyRepository<Specialty, Long> specialtyRepository;
+    // Repositories
+    @Bean
+    public OwnerRepository<Owner, Long> getOwnerRepository() {
+        return new OwnerMapRepo(getPetTypeRepository(), getPetRepository());
+    }
 
-    public ServiceBeanConfig(
-        OwnerRepository<Owner, Long> ownerRepository,
-        VetRepository<Vet, Long> vetRepository,
-        PetRepository<Pet, Long> petRepository,
-        PetTypeRepository<PetType, Long> petTypeRepository,
-        SpecialtyRepository<Specialty, Long> specialtyRepository) {
-        this.ownerRepository = ownerRepository;
-        this.vetRepository = vetRepository;
-        this.petRepository = petRepository;
-        this.petTypeRepository = petTypeRepository;
-        this.specialtyRepository = specialtyRepository;
+    @Bean
+    public VetRepository<Vet, Long> getVetRepository() {
+        return new VetMapRepo();
+    }
+
+    @Bean
+    public PetRepository<Pet, Long> getPetRepository() {
+        return new PetMapRepo();
+    }
+
+    @Bean
+    public PetTypeRepository<PetType, Long> getPetTypeRepository() {
+        return new PetTypeMapRepo();
+    }
+
+    @Bean
+    public SpecialtyRepository<Specialty, Long> getSpecialtyRepository() {
+        return new SpecialtyMapRepo();
     }
 
     // Services
     @Bean
     public OwnerService getOwnerService() {
-        return new OwnerServiceImpl(ownerRepository, getPetTypeService(), getPetService());
+        return new OwnerServiceImpl(getOwnerRepository());
     }
 
     @Bean
     public VetService getVetService() {
-        return new VetServiceImpl(vetRepository, specialtyRepository);
+        return new VetServiceImpl(getVetRepository(), getSpecialtyRepository());
     }
 
     @Bean
     public PetService getPetService() {
-        return new PetServiceImpl(petRepository);
+        return new PetServiceImpl(getPetRepository());
     }
 
     @Bean
     public PetTypeService getPetTypeService() {
-        return new PetTypeServiceImpl(petTypeRepository);
+        return new PetTypeServiceImpl(getPetTypeRepository());
     }
 
     @Bean
     public VetSpecialtyService getVetSpecialtyService() {
-        return new VetSpecialtyServiceImpl(specialtyRepository);
+        return new VetSpecialtyServiceImpl(getSpecialtyRepository());
     }
-
 }

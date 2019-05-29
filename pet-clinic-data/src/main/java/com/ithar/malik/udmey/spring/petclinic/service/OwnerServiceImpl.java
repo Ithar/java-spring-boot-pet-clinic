@@ -2,6 +2,7 @@ package com.ithar.malik.udmey.spring.petclinic.service;
 
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;
 import com.ithar.malik.udmey.spring.petclinic.model.Pet;
+import com.ithar.malik.udmey.spring.petclinic.model.PetType;
 import com.ithar.malik.udmey.spring.petclinic.respository.OwnerRepository;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +27,9 @@ public class OwnerServiceImpl implements OwnerService {
     @Override
     public Set<Owner> findAll() {
 
-        Set<Owner> owners = repository.findAll();
+        Set<Owner> owners = new HashSet<>();
+
+        repository.findAll().forEach(owners::add);
 
         if (!owners.isEmpty()) {
             return owners;
@@ -50,7 +53,8 @@ public class OwnerServiceImpl implements OwnerService {
                     }
 
                     if (pet.getPetType() != null && pet.getPetType().getId() == null) {
-                        petTypeService.save(pet.getPetType());
+                        PetType savedPetType = petTypeService.save(pet.getPetType());
+                        pet.setPetType(savedPetType);
                     }
 
                     if (pet.getId() == null) {

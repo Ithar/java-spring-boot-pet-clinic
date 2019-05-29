@@ -2,6 +2,7 @@ package com.ithar.malik.udmey.spring.petclinic.service;
 
 import com.ithar.malik.udmey.spring.petclinic.model.Specialty;
 import com.ithar.malik.udmey.spring.petclinic.respository.SpecialtyRepository;
+import java.util.HashSet;
 import java.util.Set;
 
 public class VetSpecialtyServiceImpl implements VetSpecialtyService {
@@ -20,7 +21,9 @@ public class VetSpecialtyServiceImpl implements VetSpecialtyService {
 
     @Override
     public Set<Specialty> findAll() {
-        return repository.findAll();
+        Set<Specialty> specialties = new HashSet<>();
+        repository.findAll().forEach(specialties::add);
+        return specialties;
     }
 
     @Override

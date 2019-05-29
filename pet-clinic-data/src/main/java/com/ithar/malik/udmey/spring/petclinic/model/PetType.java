@@ -1,5 +1,6 @@
 package com.ithar.malik.udmey.spring.petclinic.model;
 
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -18,6 +19,6 @@ public class PetType extends BaseEntity {
     private String typeName;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "petType")
-    private Pet pet;
+    private Set<Pet> pets;
 }
 

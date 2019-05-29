@@ -1,5 +1,6 @@
 package com.ithar.malik.udmey.spring.petclinic.model;
 
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import lombok.Data;
@@ -15,5 +16,5 @@ public class Specialty extends BaseEntity {
     private String description;
 
     @ManyToMany
-    private Vet vet;
+    private Set<Vet> vets;
 }

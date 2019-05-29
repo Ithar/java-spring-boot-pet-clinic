@@ -2,6 +2,7 @@ package com.ithar.malik.udmey.spring.petclinic.service;
 
 import com.ithar.malik.udmey.spring.petclinic.model.PetType;
 import com.ithar.malik.udmey.spring.petclinic.respository.PetTypeRepository;
+import java.util.HashSet;
 import java.util.Set;
 
 public class PetTypeServiceImpl implements PetTypeService {
@@ -20,7 +21,9 @@ public class PetTypeServiceImpl implements PetTypeService {
 
     @Override
     public Set<PetType> findAll() {
-        return repository.findAll();
+        Set<PetType> petTypes = new HashSet<>();
+        repository.findAll().forEach(petTypes::add);
+        return petTypes;
     }
 
     @Override

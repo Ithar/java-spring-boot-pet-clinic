@@ -6,10 +6,13 @@ import com.ithar.malik.udmey.spring.petclinic.model.Pet;
 import com.ithar.malik.udmey.spring.petclinic.model.PetType;
 import com.ithar.malik.udmey.spring.petclinic.model.Specialty;
 import com.ithar.malik.udmey.spring.petclinic.model.Vet;
+import com.ithar.malik.udmey.spring.petclinic.model.Visit;
 import com.ithar.malik.udmey.spring.petclinic.service.OwnerService;
 import com.ithar.malik.udmey.spring.petclinic.service.PetTypeService;
 import com.ithar.malik.udmey.spring.petclinic.service.VetService;
 import com.ithar.malik.udmey.spring.petclinic.service.VetSpecialtyService;
+import com.ithar.malik.udmey.spring.petclinic.service.VisitService;
+import java.time.LocalDate;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -20,13 +23,15 @@ public class DataInitializer implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final VetSpecialtyService betSpecialtyService;
+    private final VisitService visitService;
 
     public DataInitializer(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
-        VetSpecialtyService betSpecialtyService) {
+        VetSpecialtyService betSpecialtyService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.betSpecialtyService = betSpecialtyService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -65,15 +70,15 @@ public class DataInitializer implements CommandLineRunner {
         owner1.getPets().add(rosco);
 
         Address address2 = new Address("123 Brick Lane", "New York", "07807787878");
-        Pet justin = new Pet();
-        justin.setName("Justin");
-        justin.setPetType(savedCatType);
+        Pet fionasCat = new Pet();
+        fionasCat.setName("Justin");
+        fionasCat.setPetType(savedCatType);
 
         Owner owner2 = new Owner();
         owner2.setFirstName("Fiona");
         owner2.setLastName("Glenanne");
         owner2.setAddress(address2);
-        owner2.getPets().add(justin);
+        owner2.getPets().add(fionasCat);
 
         ownerService.save(owner1);
         ownerService.save(owner2);
@@ -107,9 +112,19 @@ public class DataInitializer implements CommandLineRunner {
         vetService.save(vet1);
         vetService.save(vet2);
 
+
+        // Visits
+        Visit visit = new Visit();
+        visit.setPet(fionasCat);
+        visit.setDescription("Hair loss");
+        visit.setDate(LocalDate.now());
+
+        visitService.save(visit);
+
         System.out.println("\n==========================================================");
-        System.out.println("Loaded owners ... ["+ownerService.findAll().size()+"]");
-        System.out.println("Loaded vets ... ["+vetService.findAll().size()+"]");
+        System.out.println("Loaded owners ... \t["+ownerService.findAll().size()+"]");
+        System.out.println("Loaded vets ... \t\t["+vetService.findAll().size()+"]");
+        //System.out.println("Loaded visits ... \t["+visitService.findAll().size()+"]");
         System.out.println("==========================================================\n");
     }
 }

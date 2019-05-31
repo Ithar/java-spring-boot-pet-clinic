@@ -34,7 +34,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Profile("map")
+@Profile({"default", "map"})
 @Configuration
 public class MapBeanConfig {
 

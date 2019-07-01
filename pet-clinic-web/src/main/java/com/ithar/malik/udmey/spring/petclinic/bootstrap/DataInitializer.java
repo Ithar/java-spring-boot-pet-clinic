@@ -35,7 +35,7 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         if (!isDataLoaded()) {
             loadData();
@@ -58,7 +58,7 @@ public class DataInitializer implements CommandLineRunner {
 
         // Owners
 
-        Address address1 = new Address("123 Brick Lane", "New York", "07807787878");
+        Address address1 = Address.builder().address  ("123 Brick Lane").city("New York").telephone("07807787878").build();
         Pet rosco = new Pet();
         rosco.setName("Rosco");
         rosco.setPetType(savedDogType);
@@ -69,7 +69,7 @@ public class DataInitializer implements CommandLineRunner {
         owner1.setAddress(address1);
         owner1.getPets().add(rosco);
 
-        Address address2 = new Address("123 Brick Lane", "New York", "07807787878");
+        Address address2 = Address.builder().address("123 Brick Lane").city("New York").telephone("07807787878").build();
         Pet fionasCat = new Pet();
         fionasCat.setName("Justin");
         fionasCat.setPetType(savedCatType);

@@ -26,7 +26,7 @@ public class OwnerMapRepo extends MapRepo<Owner, Long> implements OwnerRepositor
         return
             findAll()
             .stream()
-            .filter(owner -> lastName.equals(owner.getLastName()))
+            .filter(owner -> lastName.equalsIgnoreCase(owner.getLastName()))
             .collect(Collectors.toSet());
     }
 

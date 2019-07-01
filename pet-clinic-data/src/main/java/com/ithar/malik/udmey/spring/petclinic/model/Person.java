@@ -7,13 +7,12 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @MappedSuperclass
-public class Person extends BaseEntity {
+class Person extends BaseEntity {
 
     private static final long serialVersionUID = 3976572168425929762L;
 
     private String firstName;
 
-    //@Column(name="last_name") snake case is the default
     private String lastName;
 
 }

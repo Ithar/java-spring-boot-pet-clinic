@@ -166,12 +166,9 @@ class OwnerServiceMapImplTest {
 
         // Given
         Long ownerId = 123L;
-        String firstName = "Karl";
         String lastName = "Marx";
 
         Owner owner = new Owner();
-        owner.setId(ownerId);
-        owner.setFirstName(firstName);
         owner.setLastName(lastName);
         ownerService.save(owner);
 

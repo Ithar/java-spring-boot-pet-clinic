@@ -4,8 +4,10 @@ import com.ithar.malik.udmey.spring.petclinic.model.Owner;
 import com.ithar.malik.udmey.spring.petclinic.respository.OwnerRepository;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 public class OwnerServiceImpl implements OwnerService {
 
     private final OwnerRepository<Owner, Long> repository;
@@ -16,7 +18,7 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Override
     public Owner findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find owner with id:"+id));
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find owner with id:" + id));
     }
 
     @Override
@@ -41,6 +43,7 @@ public class OwnerServiceImpl implements OwnerService {
             return repository.save(owner);
         }
 
+        log.warn("Cannot have null owner ");
         return null;
     }
 

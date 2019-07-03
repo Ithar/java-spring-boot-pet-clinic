@@ -15,7 +15,7 @@
   <groupId>com.ithar.malik.udemy.spring</groupId>
   <artifactId>pet-clinic</artifactId>
   <version>0.0.2-SNAPSHOT</version>
-  <name>java-spring-pet-clinic</name>
+  <name>pet-clinic</name>
   <description>Demo project for Spring Boot</description>
 
   <properties>

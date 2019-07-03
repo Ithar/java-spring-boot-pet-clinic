@@ -1,9 +1,7 @@
-# java-spring-pet-clinic
-
 [![CircleCI](https://circleci.com/gh/Ithar/java-spring-pet-clinic/tree/master.svg?style=svg)](https://circleci.com/gh/Ithar/java-spring-pet-clinic/tree/master)
 
-### With thanks to  
-Beginner to Guru - John Thompson
+# java-spring-pet-clinic
+
 
 #### URLs
 http://localhost:8080

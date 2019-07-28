@@ -58,18 +58,18 @@ public class DataInitializer implements CommandLineRunner {
 
         // Owners
 
-        Address address1 = Address.builder().address  ("123 Brick Lane").city("New York").telephone("07807787878").build();
+        Address address1 = Address.builder().line1("123 Brick Lane").city("New York").telephone("07807787878").build();
         Pet rosco = new Pet();
         rosco.setName("Rosco");
         rosco.setPetType(savedDogType);
 
-        Owner owner1 = new Owner();
+        Owner owner1 = new Owner(); // TODO [IM 19-07-28] - Implement builder pattern
         owner1.setFirstName("Michael");
         owner1.setLastName("Weston");
         owner1.setAddress(address1);
         owner1.getPets().add(rosco);
 
-        Address address2 = Address.builder().address("123 Brick Lane").city("New York").telephone("07807787878").build();
+        Address address2 = Address.builder().line1("123 Brick Lane").city("New York").telephone("07807787878").build();
         Pet fionasCat = new Pet();
         fionasCat.setName("Justin");
         fionasCat.setPetType(savedCatType);

@@ -17,7 +17,7 @@ public class Address extends BaseEntity {
 
     private static final long serialVersionUID = -8652221602527671781L;
 
-    private String address;
+    private String line1;
     private String city;
     private String telephone;
 

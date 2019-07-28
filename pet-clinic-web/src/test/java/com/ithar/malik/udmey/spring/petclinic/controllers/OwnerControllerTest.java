@@ -1,7 +1,12 @@
 package com.ithar.malik.udmey.spring.petclinic.controllers;
 
+import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -40,14 +45,13 @@ class OwnerControllerTest {
 
         owners.add(owner1);
         owners.add(owner2);
-
-        when(ownerService.findAll()).thenReturn(owners);
     }
 
     @Test
     void list() throws Exception {
 
         // Given
+        when(ownerService.findAll()).thenReturn(owners);
 
         // When
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
@@ -63,6 +67,7 @@ class OwnerControllerTest {
     void listByIndex() throws Exception {
 
         // Given setup
+        when(ownerService.findAll()).thenReturn(owners);
 
         // When
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
@@ -78,13 +83,21 @@ class OwnerControllerTest {
     void find() throws Exception {
 
         // Given setup
+        long id = 1L;
+        Owner owner = new Owner();
+        owner.setId(id);
+        when(ownerService.findById(any())).thenReturn(owner);
 
         // When
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         // Then
-        mockMvc.perform(get("/owners/find"))
+        mockMvc.perform(get("/owners/" + id))
             .andExpect(status().isOk())
-            .andExpect(view().name("notimplemented"));
+            .andExpect(view().name("owners/view"))
+            .andExpect(model().attribute("owner", hasProperty("id", is(id))));
+
+        verify(ownerService, times(1)).findById(id);
     }
+
 }

@@ -6,15 +6,18 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@EqualsAndHashCode(callSuper = true, exclude = {"owner", "petType", "visits"})
+@Getter
+@Setter
 @Entity
 @Table(name="pets")
 public class Pet extends BaseEntity {
@@ -24,6 +27,7 @@ public class Pet extends BaseEntity {
     private String name;
 
     @ManyToOne
+    @JoinColumn(name = "owner_id")
     private Owner owner;
 
     @OneToOne

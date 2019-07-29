@@ -7,18 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Setter
+@Getter
 @Entity
 @Table(name="owners")
 public class Owner extends Person {
 
     private static final long serialVersionUID = -4864946874173774947L;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Set<Pet> pets = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)

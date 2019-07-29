@@ -5,11 +5,13 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@EqualsAndHashCode(callSuper = true, exclude = {"pets"})
+@Getter
+@Setter
 @Entity
 @Table(name="types")
 public class PetType extends BaseEntity {

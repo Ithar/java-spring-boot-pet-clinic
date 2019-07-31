@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -22,6 +23,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -80,7 +82,7 @@ class OwnerControllerTest {
     }
 
     @Test
-    void find() throws Exception {
+    void viewOwner() throws Exception {
 
         // Given setup
         long id = 1L;
@@ -98,6 +100,91 @@ class OwnerControllerTest {
             .andExpect(model().attribute("owner", hasProperty("id", is(id))));
 
         verify(ownerService, times(1)).findById(id);
+    }
+
+    @Test
+    void findOwner() throws Exception {
+
+        // Given setup
+
+        // When
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+
+        // Then
+        mockMvc.perform(get("/owners/find"))
+            .andExpect(status().isOk())
+            .andExpect(view().name("owners/find"))
+            .andExpect(model().attributeExists("owner"));
+    }
+
+    @Test
+    void findOwnerProcess_NotFound() throws Exception {
+
+        // Given
+        String lastName = "Name 404";
+        Set<Owner> owners = new HashSet<>();
+
+        when(ownerService.findByLastName(lastName)).thenReturn(owners);
+
+        //When
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+
+        // Then
+        // TODO [IM 19-07-30] - Check for bindingResult value
+        mockMvc.perform(post("/owners/find")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("lastName", lastName))
+            .andExpect(status().isOk())
+            .andExpect(view().name("owners/find"));
+    }
+
+    @Test
+    void findOwnerProcess_OneOwner() throws Exception {
+
+        // Given
+        long id = 1L;
+        String lastName = "Doe";
+        Owner owner = new Owner();
+        owner.setId(id);
+        owner.setLastName(lastName);
+
+        Set<Owner> owners = new HashSet<>();
+        owners.add(owner);
+
+        when(ownerService.findByLastName(lastName)).thenReturn(owners);
+
+        //When
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+
+        // Then
+        mockMvc.perform(post("/owners/find")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("lastName", lastName))
+            .andExpect(status().is3xxRedirection())
+            .andExpect(view().name("redirect:/owners/" + id))
+            .andExpect(model().attributeExists("owner"));
+    }
+
+    @Test
+    void findOwnerProcess_ManyOwners() throws Exception {
+
+        // Given
+        String lastName = "Doe";
+        Owner owner = new Owner();
+        owner.setLastName(lastName);
+
+        when(ownerService.findByLastName(lastName)).thenReturn(owners);
+
+        //When
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+
+        // Then
+        mockMvc.perform(post("/owners/find")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("lastName", lastName))
+            .andExpect(status().isOk())
+            .andExpect(view().name("owners/list"))
+            .andExpect(model().attribute("owners", hasSize(2)));
     }
 
 }

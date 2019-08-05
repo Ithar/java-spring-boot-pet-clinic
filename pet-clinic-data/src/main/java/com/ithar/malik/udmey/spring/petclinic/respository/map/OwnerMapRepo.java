@@ -31,6 +31,15 @@ public class OwnerMapRepo extends MapRepo<Owner, Long> implements OwnerRepositor
     }
 
     @Override
+    public Set<Owner> findByLastNameContainingIgnoreCase(String lastName) {
+        return
+            findAll()
+                .stream()
+                .filter(owner -> owner.getLastName().toLowerCase().contains(lastName.toLowerCase()))
+                .collect(Collectors.toSet());
+    }
+
+    @Override
     public Owner save(Owner owner) {
 
         Set<Pet> pets = owner.getPets();

@@ -11,4 +11,6 @@ public interface OwnerJPARepo extends CrudRepository<Owner, Long>, OwnerReposito
 
     Set<Owner> findByLastName(String lastName);
 
+    Set<Owner> findByLastNameContainingIgnoreCase(String lastName);
+
 }

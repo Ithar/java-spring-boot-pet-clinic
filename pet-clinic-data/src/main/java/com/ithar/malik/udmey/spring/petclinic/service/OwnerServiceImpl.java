@@ -66,6 +66,20 @@ public class OwnerServiceImpl implements OwnerService {
             return owners;
         }
 
+        log.info("No owners found with last name equalling to {}", lastName);
+        return new HashSet<>();
+    }
+
+    @Override
+    public Set<Owner> findByLastNameLike(String lastName) {
+
+        Set<Owner> owners = repository.findByLastNameContainingIgnoreCase(lastName);
+
+        if (!owners.isEmpty()) {
+            return owners;
+        }
+
+        log.info("No owners found with last name equalling to {}", lastName);
         return new HashSet<>();
     }
 }

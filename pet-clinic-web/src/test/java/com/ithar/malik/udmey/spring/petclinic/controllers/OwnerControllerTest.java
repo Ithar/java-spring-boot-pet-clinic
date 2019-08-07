@@ -223,7 +223,7 @@ class OwnerControllerTest {
     }
 
     @Test
-    void updateOwnerForm() throws Exception {
+    void editOwnerForm() throws Exception {
 
         // Given
         long id = 1L;
@@ -234,14 +234,14 @@ class OwnerControllerTest {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         // Then
-        mockMvc.perform(get("/owners/" + owner.getId() + "/update"))
+        mockMvc.perform(get("/owners/" + owner.getId() + "/edit"))
             .andExpect(status().isOk())
             .andExpect(view().name("owners/form"))
             .andExpect(model().attributeExists("owner"));
     }
 
     @Test
-    void updateOwnerFormProcess() throws Exception {
+    void editOwnerFormProcess() throws Exception {
 
         // Given
         long id = 1L;
@@ -254,7 +254,7 @@ class OwnerControllerTest {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         // Then
-        mockMvc.perform(post("/owners/" + owner.getId() + "/update"))
+        mockMvc.perform(post("/owners/" + owner.getId() + "/edit"))
             .andExpect(status().isOk())
             .andExpect(view().name("owners/" + owner.getId() + "/view"))
             .andExpect(model().attributeExists("owner"));

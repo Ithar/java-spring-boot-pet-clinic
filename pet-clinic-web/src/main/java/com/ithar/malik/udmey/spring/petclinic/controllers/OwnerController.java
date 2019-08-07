@@ -72,15 +72,15 @@ public class OwnerController {
     }
 
     // Update owner
-    @GetMapping("/{id}/update")
-    public ModelAndView updateOwnerForm(@PathVariable("id") int id) {
+    @GetMapping("/{id}/edit")
+    public ModelAndView editOwnerForm(@PathVariable("id") int id) {
         ModelAndView mav = new ModelAndView("owners/form");
         mav.addObject(new Owner());
         return mav;
     }
 
-    @PostMapping("/{id}/update")
-    public ModelAndView updateOwnerFormProcess(@PathVariable("id") int id) {
+    @PostMapping("/{id}/edit")
+    public ModelAndView editOwnerFormProcess(@PathVariable("id") int id) {
         ModelAndView mav = new ModelAndView("owners/form");
         mav.addObject(new Owner());
         return mav;

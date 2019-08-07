@@ -70,7 +70,7 @@ public class OwnerController {
         log.info("Creating new owner");
 
         Owner owner = ownerService.save(ownerDTO);
-        ModelAndView mav = new ModelAndView("owners/" + owner.getId() + "/view");
+        ModelAndView mav = new ModelAndView("owners/view");
         mav.addObject(owner);
         return mav;
     }

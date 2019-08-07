@@ -11,4 +11,6 @@ public interface OwnerService extends BaseCrudService<Owner, Long> {
     Set<Owner> findByLastNameLike(String lastName);
 
     Owner save(OwnerDTO ownerDTO);
+
+    OwnerDTO mapToDTO(Owner owner);
 }

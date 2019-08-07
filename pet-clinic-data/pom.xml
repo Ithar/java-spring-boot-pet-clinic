@@ -37,15 +37,16 @@
       <version>${org.projectlombok.version}</version>
       <optional>true</optional>
     </dependency>
+    <!-- map-struct -->
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct</artifactId>
       <version>${org.mapstruct.version}</version>
-      <scope>provided</scope>
     </dependency>
 
-
+    <!-- ################ -->
     <!-- Test dependencies -->
+    <!-- ################ -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -106,7 +107,7 @@
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
-          <!-- Need for mapstruct to work with Lombok -->
+          <!-- Need for map-struct to work with Lombok -->
           <annotationProcessorPaths>
             <path>
               <groupId>org.mapstruct</groupId>

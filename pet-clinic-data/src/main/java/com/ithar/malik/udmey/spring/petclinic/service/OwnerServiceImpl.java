@@ -59,6 +59,11 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
+    public OwnerDTO mapToDTO(Owner owner) {
+        return ownerMapperService.mapToOwnerDTO(owner);
+    }
+
+    @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
     }

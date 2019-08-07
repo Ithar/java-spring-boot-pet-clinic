@@ -56,6 +56,9 @@ public class OwnerController {
     // Create owner
     @GetMapping("/new")
     public ModelAndView createOwnerForm() {
+
+        log.info("New owner form");
+
         ModelAndView mav = new ModelAndView("owners/form");
         mav.addObject("owner", new OwnerDTO());
         return mav;
@@ -64,8 +67,9 @@ public class OwnerController {
     @PostMapping("/new")
     public ModelAndView createOwnerFromProcess(@Valid OwnerDTO ownerDTO, BindingResult result) {
 
-        Owner owner = ownerService.save(ownerDTO);
+        log.info("Creating new owner");
 
+        Owner owner = ownerService.save(ownerDTO);
         ModelAndView mav = new ModelAndView("owners/" + owner.getId() + "/view");
         mav.addObject(owner);
         return mav;
@@ -73,14 +77,22 @@ public class OwnerController {
 
     // Update owner
     @GetMapping("/{id}/edit")
-    public ModelAndView editOwnerForm(@PathVariable("id") int id) {
+    public ModelAndView editOwnerForm(@PathVariable("id") long id) {
+
+        log.info("Editing owner with id {}", id);
+
+        Owner owner = ownerService.findById(id);
+
         ModelAndView mav = new ModelAndView("owners/form");
-        mav.addObject(new Owner());
+        mav.addObject("owner", ownerService.mapToDTO(owner));
         return mav;
     }
 
     @PostMapping("/{id}/edit")
-    public ModelAndView editOwnerFormProcess(@PathVariable("id") int id) {
+    public ModelAndView editOwnerFormProcess(@PathVariable("id") long id) {
+
+        log.info("Processing owner edit with id {}", id);
+
         ModelAndView mav = new ModelAndView("owners/form");
         mav.addObject(new Owner());
         return mav;

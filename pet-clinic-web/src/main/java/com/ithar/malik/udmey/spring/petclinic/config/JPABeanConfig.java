@@ -1,5 +1,6 @@
 package com.ithar.malik.udmey.spring.petclinic.config;
 
+import com.ithar.malik.udmey.spring.petclinic.mapper.OwnerMapperService;
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;
 import com.ithar.malik.udmey.spring.petclinic.model.Pet;
 import com.ithar.malik.udmey.spring.petclinic.model.PetType;
@@ -39,25 +40,28 @@ public class JPABeanConfig {
     private final SpecialtyRepository<Specialty, Long> specialtyRepository;
     private final VisitRepository<Visit, Long> visitRepository;
 
+    private final OwnerMapperService ownerMapperService;
+
     public JPABeanConfig(
         OwnerRepository<Owner, Long> ownerRepository,
         VetRepository<Vet, Long> vetRepository,
         PetRepository<Pet, Long> petRepository,
         PetTypeRepository<PetType, Long> petTypeRepository,
         SpecialtyRepository<Specialty, Long> specialtyRepository,
-        VisitRepository<Visit, Long> visitRepository) {
+        VisitRepository<Visit, Long> visitRepository, OwnerMapperService ownerMapperService) {
         this.ownerRepository = ownerRepository;
         this.vetRepository = vetRepository;
         this.petRepository = petRepository;
         this.petTypeRepository = petTypeRepository;
         this.specialtyRepository = specialtyRepository;
         this.visitRepository = visitRepository;
+        this.ownerMapperService = ownerMapperService;
     }
 
     // Services
     @Bean
     public OwnerService getOwnerService() {
-        return new OwnerServiceImpl(ownerRepository);
+        return new OwnerServiceImpl(ownerMapperService, ownerRepository);
     }
 
     @Bean

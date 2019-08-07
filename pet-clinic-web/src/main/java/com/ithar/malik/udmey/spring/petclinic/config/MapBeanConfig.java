@@ -1,5 +1,6 @@
 package com.ithar.malik.udmey.spring.petclinic.config;
 
+import com.ithar.malik.udmey.spring.petclinic.mapper.OwnerMapperService;
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;
 import com.ithar.malik.udmey.spring.petclinic.model.Pet;
 import com.ithar.malik.udmey.spring.petclinic.model.PetType;
@@ -72,7 +73,7 @@ public class MapBeanConfig {
     // Services
     @Bean
     public OwnerService getOwnerService() {
-        return new OwnerServiceImpl(getOwnerRepository());
+        return new OwnerServiceImpl(new OwnerMapperService(), getOwnerRepository());
     }
 
     @Bean

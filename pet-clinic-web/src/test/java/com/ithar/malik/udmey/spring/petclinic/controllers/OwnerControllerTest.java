@@ -187,4 +187,76 @@ class OwnerControllerTest {
             .andExpect(model().attribute("owners", hasSize(2)));
     }
 
+    @Test
+    void createOwnerForm() throws Exception {
+
+        // Given
+
+        // When
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+
+        // Then
+        mockMvc.perform(get("/owners/new"))
+            .andExpect(status().isOk())
+            .andExpect(view().name("owners/form"))
+            .andExpect(model().attributeExists("owner"));
+    }
+
+    @Test
+    void createOwnerFormProcess() throws Exception {
+
+        // Given
+        long id = 1L;
+        Owner owner = new Owner();
+        owner.setId(id);
+
+        when(ownerService.save(owner)).thenReturn(owner);
+
+        // When
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+
+        // Then
+        mockMvc.perform(post("/owners/new"))
+            .andExpect(status().isOk())
+            .andExpect(view().name("owners/" + owner.getId() + "/view"))
+            .andExpect(model().attributeExists("owner"));
+    }
+
+    @Test
+    void updateOwnerForm() throws Exception {
+
+        // Given
+        long id = 1L;
+        Owner owner = new Owner();
+        owner.setId(id);
+
+        // When
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+
+        // Then
+        mockMvc.perform(get("/owners/" + owner.getId() + "/update"))
+            .andExpect(status().isOk())
+            .andExpect(view().name("owners/form"))
+            .andExpect(model().attributeExists("owner"));
+    }
+
+    @Test
+    void updateOwnerFormProcess() throws Exception {
+
+        // Given
+        long id = 1L;
+        Owner owner = new Owner();
+        owner.setId(id);
+
+        when(ownerService.save(owner)).thenReturn(owner);
+
+        // When
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+
+        // Then
+        mockMvc.perform(post("/owners/" + owner.getId() + "/update"))
+            .andExpect(status().isOk())
+            .andExpect(view().name("owners/" + owner.getId() + "/view"))
+            .andExpect(model().attributeExists("owner"));
+    }
 }

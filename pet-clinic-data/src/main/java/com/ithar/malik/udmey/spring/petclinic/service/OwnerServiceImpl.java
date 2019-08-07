@@ -1,5 +1,7 @@
 package com.ithar.malik.udmey.spring.petclinic.service;
 
+import com.ithar.malik.udmey.spring.petclinic.dto.OwnerDTO;
+import com.ithar.malik.udmey.spring.petclinic.mapper.OwnerMapperService;
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;
 import com.ithar.malik.udmey.spring.petclinic.respository.OwnerRepository;
 import java.util.HashSet;
@@ -10,9 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class OwnerServiceImpl implements OwnerService {
 
+    private final OwnerMapperService ownerMapperService;
     private final OwnerRepository<Owner, Long> repository;
 
-    public OwnerServiceImpl(OwnerRepository<Owner, Long> repository) {
+    public OwnerServiceImpl(OwnerMapperService ownerMapperService,
+        OwnerRepository<Owner, Long> repository) {
+        this.ownerMapperService = ownerMapperService;
         this.repository = repository;
     }
 
@@ -45,6 +50,12 @@ public class OwnerServiceImpl implements OwnerService {
 
         log.warn("Cannot have null owner ");
         return null;
+    }
+
+    @Override
+    public Owner save(OwnerDTO ownerDTO) {
+        Owner owner = ownerMapperService.mapToOwner(ownerDTO);
+        return save(owner);
     }
 
     @Override
@@ -82,4 +93,5 @@ public class OwnerServiceImpl implements OwnerService {
         log.info("No owners found with last name equalling to {}", lastName);
         return new HashSet<>();
     }
+
 }

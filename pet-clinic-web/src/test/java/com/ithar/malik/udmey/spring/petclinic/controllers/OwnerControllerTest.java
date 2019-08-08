@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import com.ithar.malik.udmey.spring.petclinic.dto.OwnerDTO;
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;
 import com.ithar.malik.udmey.spring.petclinic.service.OwnerService;
 import java.util.HashSet;
@@ -124,7 +125,7 @@ class OwnerControllerTest {
         String lastName = "Name 404";
         Set<Owner> owners = new HashSet<>();
 
-        when(ownerService.findByLastName(lastName)).thenReturn(owners);
+        when(ownerService.findByLastNameLike(lastName)).thenReturn(owners);
 
         //When
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
@@ -151,7 +152,7 @@ class OwnerControllerTest {
         Set<Owner> owners = new HashSet<>();
         owners.add(owner);
 
-        when(ownerService.findByLastName(lastName)).thenReturn(owners);
+        when(ownerService.findByLastNameLike(lastName)).thenReturn(owners);
 
         //When
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
@@ -173,7 +174,7 @@ class OwnerControllerTest {
         Owner owner = new Owner();
         owner.setLastName(lastName);
 
-        when(ownerService.findByLastName(lastName)).thenReturn(owners);
+        when(ownerService.findByLastNameLike(lastName)).thenReturn(owners);
 
         //When
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
@@ -207,10 +208,9 @@ class OwnerControllerTest {
 
         // Given
         long id = 1L;
-        Owner owner = new Owner();
-        owner.setId(id);
+        OwnerDTO owner = new OwnerDTO();
 
-        when(ownerService.save(owner)).thenReturn(owner);
+        when(ownerService.save(owner)).thenReturn(new Owner());
 
         // When
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
@@ -218,7 +218,7 @@ class OwnerControllerTest {
         // Then
         mockMvc.perform(post("/owners/new"))
             .andExpect(status().isOk())
-            .andExpect(view().name("owners/" + owner.getId() + "/view"))
+            .andExpect(view().name("owners/view"))
             .andExpect(model().attributeExists("owner"));
     }
 
@@ -229,6 +229,8 @@ class OwnerControllerTest {
         long id = 1L;
         Owner owner = new Owner();
         owner.setId(id);
+
+        when(ownerService.mapToDTO(any())).thenReturn(new OwnerDTO());
 
         // When
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
@@ -245,18 +247,17 @@ class OwnerControllerTest {
 
         // Given
         long id = 1L;
-        Owner owner = new Owner();
-        owner.setId(id);
+        OwnerDTO owner = new OwnerDTO();
 
-        when(ownerService.save(owner)).thenReturn(owner);
+        when(ownerService.save(owner)).thenReturn(new Owner());
 
         // When
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         // Then
-        mockMvc.perform(post("/owners/" + owner.getId() + "/edit"))
+        mockMvc.perform(post("/owners/" + id + "/edit"))
             .andExpect(status().isOk())
-            .andExpect(view().name("owners/" + owner.getId() + "/view"))
+            .andExpect(view().name("owners/view"))
             .andExpect(model().attributeExists("owner"));
     }
 }

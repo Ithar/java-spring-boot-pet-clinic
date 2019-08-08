@@ -65,9 +65,15 @@ public class OwnerController {
     }
 
     @PostMapping("/new")
-    public ModelAndView createOwnerFromProcess(@Valid OwnerDTO ownerDTO, BindingResult result) {
+    public ModelAndView createOwnerFormProcess(@Valid OwnerDTO ownerDTO, BindingResult result) {
 
         log.info("Creating new owner");
+
+        if (result.hasErrors()) {
+            ModelAndView mav = new ModelAndView("owners/form");
+            mav.addObject(ownerDTO);
+            return mav;
+        }
 
         Owner owner = ownerService.save(ownerDTO);
         ModelAndView mav = new ModelAndView("owners/view");
@@ -77,7 +83,7 @@ public class OwnerController {
 
     // Update owner
     @GetMapping("/{id}/edit")
-    public ModelAndView editOwnerForm(@PathVariable("id") long id) {
+    public ModelAndView editOwnerForm(@PathVariable long id) {
 
         log.info("Editing owner with id {}", id);
 
@@ -89,12 +95,19 @@ public class OwnerController {
     }
 
     @PostMapping("/{id}/edit")
-    public ModelAndView editOwnerFormProcess(@PathVariable("id") long id) {
+    public ModelAndView editOwnerFormProcess(@PathVariable long id, @Valid OwnerDTO ownerDTO, BindingResult result) {
 
         log.info("Processing owner edit with id {}", id);
 
-        ModelAndView mav = new ModelAndView("owners/form");
-        mav.addObject(new Owner());
+        if (result.hasErrors()) {
+            ModelAndView mav = new ModelAndView("owners/form");
+            mav.addObject("owner", ownerDTO);
+            return mav;
+        }
+
+        ownerService.save(ownerDTO);
+        ModelAndView mav = new ModelAndView("owners/view");
+        mav.addObject("owner", ownerDTO);
         return mav;
     }
 
@@ -113,6 +126,11 @@ public class OwnerController {
             result.rejectValue("lastName", "notFound", "not found");
             log.warn("Cannot find owner with empty last name:" + owner.getLastName());
             return "owners/find";
+        }
+
+        if (result.hasErrors()) {
+            model.addAttribute("owner", ownerService.mapToDTO(owner));
+            return "owners/form";
         }
 
         String lastName = owner.getLastName();

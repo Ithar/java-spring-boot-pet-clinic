@@ -3,8 +3,10 @@ package com.ithar.malik.udmey.spring.petclinic.service;
 import com.ithar.malik.udmey.spring.petclinic.dto.OwnerDTO;
 import com.ithar.malik.udmey.spring.petclinic.mapper.OwnerMapperService;
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;
+import com.ithar.malik.udmey.spring.petclinic.model.Pet;
 import com.ithar.malik.udmey.spring.petclinic.respository.OwnerRepository;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,6 +63,19 @@ public class OwnerServiceImpl implements OwnerService {
     @Override
     public OwnerDTO mapToDTO(Owner owner) {
         return ownerMapperService.mapToOwnerDTO(owner);
+    }
+
+    @Override
+    public Optional<Pet> getPetByOwner(Owner owner, long petId) {
+        return owner.getPets()
+            .stream()
+            .filter(p -> p.getId().equals(petId))
+            .findFirst();
+    }
+
+    @Override
+    public void addPet(Owner owner, Pet pet) {
+        owner.getPets().add(pet);
     }
 
     @Override

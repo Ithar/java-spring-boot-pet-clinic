@@ -71,17 +71,18 @@ public class OwnerController {
 
         if (result.hasErrors()) {
             ModelAndView mav = new ModelAndView("owners/form");
-            mav.addObject(ownerDTO);
+            mav.addObject("owner", ownerDTO);
             return mav;
         }
 
         Owner owner = ownerService.save(ownerDTO);
+        ownerDTO.setId(owner.getId());
         ModelAndView mav = new ModelAndView("owners/view");
-        mav.addObject(owner);
+        mav.addObject("owner", ownerDTO);
         return mav;
     }
 
-    // Update owner
+    // Edit owner
     @GetMapping("/{id}/edit")
     public ModelAndView editOwnerForm(@PathVariable long id) {
 
@@ -145,6 +146,4 @@ public class OwnerController {
 
         return listOwners(model, owners);
     }
-
-
 }

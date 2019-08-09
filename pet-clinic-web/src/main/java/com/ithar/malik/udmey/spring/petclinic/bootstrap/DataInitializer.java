@@ -129,11 +129,11 @@ public class DataInitializer implements CommandLineRunner {
 
     private void setPetTypes() {
 
-        PetType dogType = new PetType();
-        dogType.setTypeName("Dog");
+        PetType dogType = PetType.builder().build();
+        dogType.setName("Dog");
 
-        PetType catType = new PetType();
-        catType.setTypeName("Cat");
+        PetType catType = PetType.builder().build();
+        catType.setName("Cat");
 
         this.dogPetType = petTypeService.save(dogType);
         this.catPetType = petTypeService.save(catType);

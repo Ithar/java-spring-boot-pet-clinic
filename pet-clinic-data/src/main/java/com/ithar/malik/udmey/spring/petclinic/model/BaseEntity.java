@@ -15,7 +15,13 @@ public class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    public Long id;
+
+    BaseEntity() {
+    }
+
+    BaseEntity(Long id) {
+    }
 
     public Long getId() {
         return id;

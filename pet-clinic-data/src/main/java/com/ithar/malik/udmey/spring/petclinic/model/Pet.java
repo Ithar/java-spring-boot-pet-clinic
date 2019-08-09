@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-@EqualsAndHashCode(callSuper = true, exclude = {"owner", "petType", "visits"})
+@EqualsAndHashCode(callSuper = true, of = {"id"})
 @Getter
 @Setter
 @Entity

@@ -1,15 +1,17 @@
 package com.ithar.malik.udmey.spring.petclinic.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import lombok.EqualsAndHashCode;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@EqualsAndHashCode(callSuper = true, exclude = {"pets"})
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Getter
 @Setter
 @Entity
@@ -18,9 +20,8 @@ public class PetType extends BaseEntity {
 
     private static final long serialVersionUID = -5859880731552470953L;
 
-    private String typeName;
+    @Column(name = "type_name")
+    private String name;
 
-    @OneToMany(mappedBy = "petType")
-    private Set<Pet> pets = new HashSet<>();
 }
 

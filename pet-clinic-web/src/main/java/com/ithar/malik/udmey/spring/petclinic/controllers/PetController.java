@@ -28,7 +28,7 @@ import org.thymeleaf.util.StringUtils;
 @Controller
 public class PetController {
 
-    private static final String PET_CREATE_FORM = "owners/pets/pet-form";
+    static final String PET_CREATE_FORM = "owners/pets/pet-form";
     private static final String PET_VISIT_FORM = "owners/pets/visit-form";
 
     private final PetService petService;
@@ -75,6 +75,7 @@ public class PetController {
 
         log.info("Creating new pet for owner [id={}]", owner.getId());
 
+        // TODO [IM 19-08-09] Move this to validator
         if (StringUtils.isEmpty(pet.getName())) {
             result.rejectValue("name", "duplicate", "already exists");
         }
@@ -111,6 +112,12 @@ public class PetController {
     public String editPetFormProcess(Model model, Owner owner, @PathVariable long id, @Valid Pet pet, BindingResult result) {
 
         log.info("Processing pet edit with [ownerId = {}, petId={}]", owner.getId(), id);
+
+        // TODO [IM 19-08-09] Move this to validator
+        if (StringUtils.isEmpty(pet.getName())) {
+            result.rejectValue("name", "duplicate", "already exists");
+        }
+
 
         if (result.hasErrors()) {
             model.addAttribute("pet", pet);

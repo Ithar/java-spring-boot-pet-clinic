@@ -89,7 +89,12 @@ class OwnerControllerTest {
         long id = 1L;
         Owner owner = new Owner();
         owner.setId(id);
+
+        OwnerDTO dto = new OwnerDTO();
+        dto.setId(id);
+
         when(ownerService.findById(any())).thenReturn(owner);
+        when(ownerService.mapToDTO(any())).thenReturn(dto);
 
         // When
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
@@ -208,18 +213,18 @@ class OwnerControllerTest {
 
         // Given
         long id = 1L;
-        OwnerDTO owner = new OwnerDTO();
+        Owner owner = new Owner();
+        owner.setId(id);
 
-        when(ownerService.save(owner)).thenReturn(new Owner());
+        when(ownerService.save((OwnerDTO) any())).thenReturn(owner);
 
         // When
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         // Then
         mockMvc.perform(post("/owners/new"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("owners/view"))
-            .andExpect(model().attributeExists("owner"));
+            .andExpect(status().is3xxRedirection())
+            .andExpect(view().name("redirect:/owners/" + id));
     }
 
     @Test
@@ -247,17 +252,20 @@ class OwnerControllerTest {
 
         // Given
         long id = 1L;
-        OwnerDTO owner = new OwnerDTO();
 
-        when(ownerService.save(owner)).thenReturn(new Owner());
+        Owner owner = new Owner();
+        owner.setId(id);
+        owner.setPets(new HashSet<>());
+
+        when(ownerService.findById(id)).thenReturn(owner);
+        when(ownerService.save((OwnerDTO) any())).thenReturn(owner);
 
         // When
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         // Then
         mockMvc.perform(post("/owners/" + id + "/edit"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("owners/view"))
-            .andExpect(model().attributeExists("owner"));
+            .andExpect(status().is3xxRedirection())
+            .andExpect(view().name("redirect:/owners/" + id));
     }
 }

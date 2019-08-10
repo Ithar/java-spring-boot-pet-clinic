@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h1 th:text="'Pet Clinic - Owners'">Owners</h1>
+<h1 th:text="'Pet Clinic - Owners'">Owners Listing</h1>
 
   <table class="table table-striped">
     <thead>
@@ -17,13 +17,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr th:each="owner: ${owners}">
-        <td th:text="${owner?.id}"></td>
+    <tr th:each="owner: ${owners}" class="ownerRow" th:attr="data-id=${owner.id}">
+      <td th:text="${owner.id}"></td>
         <td th:text="${owner?.firstName}"></td>
         <td th:text="${owner?.lastName}"></td>
       </tr>
     </tbody>
   </table>
+
+<script type="text/javascript">
+    $(".ownerRow").click(function () {
+        var id = $(this).attr("data-id");
+        location.href = "/owners/" + id;
+    });
+</script>
 
 </body>
 </html>

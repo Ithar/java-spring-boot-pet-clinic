@@ -6,9 +6,10 @@
 </head>
 <body>
 
-<h2>Owner</h2>
+<h2 th:text="${owner.id} ? 'Owner Edit' : 'Owner Create'">Owner</h2>
 <form th:object="${owner}" class="form-horizontal" id="add-owner-form" method="post">
   <div class="form-group has-feedback">
+    <input type="hidden" th:field="*{id}"/>
     <input th:label="firstName" th:replace="~{fragments/inputField :: input ('First Name', 'firstName', 'text')}"/>
     <input th:label="lastName" th:replace="~{fragments/inputField :: input ('Last Name', 'lastName', 'text')}"/>
     <input th:label="address" th:replace="~{fragments/inputField :: input ('Address Line', 'line1', 'text')}"/>

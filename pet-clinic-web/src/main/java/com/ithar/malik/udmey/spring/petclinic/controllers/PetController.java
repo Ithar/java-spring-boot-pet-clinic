@@ -81,10 +81,12 @@ public class PetController {
         }
 
         if (result.hasErrors()) {
+            log.info("Failed to create new pet due to binding errors.");
             model.addAttribute("pet", pet);
             return PET_CREATE_FORM;
         }
 
+        pet.setOwner(owner);
         ownerService.addPet(owner, pet);
         petService.save(pet);
 

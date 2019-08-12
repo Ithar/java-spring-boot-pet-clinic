@@ -29,7 +29,6 @@ import org.thymeleaf.util.StringUtils;
 public class PetController {
 
     static final String PET_CREATE_FORM = "owners/pets/pet-form";
-    private static final String PET_VISIT_FORM = "owners/pets/visit-form";
 
     private final PetService petService;
     private final PetTypeService petTypeService;

@@ -3,8 +3,12 @@ package com.ithar.malik.udmey.spring.petclinic.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import com.ithar.malik.udmey.spring.petclinic.mapper.OwnerMapperService;
 import com.ithar.malik.udmey.spring.petclinic.model.Owner;
 import com.ithar.malik.udmey.spring.petclinic.model.Pet;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.OwnerMapRepo;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.PetMapRepo;
+import com.ithar.malik.udmey.spring.petclinic.respository.map.PetTypeMapRepo;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +20,7 @@ class OwnerServiceMapImplTest {
 
     @BeforeEach
     void setUp() {
-        //this.ownerService = new OwnerServiceImpl(new OwnerMapRepo(new PetTypeMapRepo(), new PetMapRepo()));
+        this.ownerService = new OwnerServiceImpl(new OwnerMapperService(), new OwnerMapRepo(new PetTypeMapRepo(), new PetMapRepo()));
     }
 
     @Test

@@ -3,7 +3,7 @@
   <parent>
     <artifactId>pet-clinic</artifactId>
     <groupId>com.ithar.malik.udemy.spring</groupId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
@@ -14,14 +14,16 @@
     <webjars-bootstrap.version>3.3.6</webjars-bootstrap.version>
     <webjars-jquery-ui.version>1.11.4</webjars-jquery-ui.version>
     <webjars-jquery.version>2.2.4</webjars-jquery.version>
+
     <wro4j.version>1.8.0</wro4j.version>
+    <mockito.version>2.23.0</mockito.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>com.ithar.malik.udemy.spring</groupId>
       <artifactId>pet-clinic-data</artifactId>
-      <version>0.0.2-SNAPSHOT</version>
+      <version>0.0.3-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -35,6 +37,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+
     <!-- webjars -->
     <dependency>
       <groupId>org.webjars</groupId>
@@ -81,12 +84,7 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-junit-jupiter</artifactId>
-      <version>2.22.0</version>
-      <scope>test</scope>
-    </dependency>
+
     <!-- Junit 5 dependencies -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -98,56 +96,46 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <version>2.22.0</version>
+      <scope>test</scope>
+    </dependency>
 
   </dependencies>
 
   <build>
     <plugins>
-    <plugin>
-      <groupId>ro.isdc.wro4j</groupId>
-      <artifactId>wro4j-maven-plugin</artifactId>
-      <version>${wro4j.version}</version>
-      <executions>
-        <execution>
-          <phase>generate-resources</phase>
-          <goals>
-            <goal>run</goal>
-          </goals>
-        </execution>
-      </executions>
-      <configuration>
-        <wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
-        <cssDestinationFolder>${basedir}/target/classes/static/resources/css</cssDestinationFolder>
-        <wroFile>${basedir}/src/main/wro/wro.xml</wroFile>
-        <extraConfigFile>${basedir}/src/main/wro/wro.properties</extraConfigFile>
-        <contextFolder>${basedir}/src/main/less</contextFolder>
-      </configuration>
-      <dependencies>
-        <dependency>
-          <groupId>org.webjars</groupId>
-          <artifactId>bootstrap</artifactId>
-          <version>${webjars-bootstrap.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.mockito</groupId>
-          <artifactId>mockito-core</artifactId>
-          <version>${mockito.version}</version>
-        </dependency>
-      </dependencies>
-    </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.2</version>
-        <!-- Needed due to broken build on circleCI  -->
+        <groupId>ro.isdc.wro4j</groupId>
+        <artifactId>wro4j-maven-plugin</artifactId>
+        <version>${wro4j.version}</version>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
-          <useSystemClassLoader>false</useSystemClassLoader>
+          <wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
+          <cssDestinationFolder>${basedir}/target/classes/static/resources/css</cssDestinationFolder>
+          <wroFile>${basedir}/src/main/wro/wro.xml</wroFile>
+          <extraConfigFile>${basedir}/src/main/wro/wro.properties</extraConfigFile>
+          <contextFolder>${basedir}/src/main/less</contextFolder>
         </configuration>
         <dependencies>
           <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-surefire-provider</artifactId>
-            <version>1.2.0</version>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>${webjars-bootstrap.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
           </dependency>
         </dependencies>
       </plugin>
